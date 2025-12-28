@@ -1,0 +1,167 @@
+import { Request, Response } from 'express';
+import { InvestigationService } from './investigation.service';
+import { asyncHandler } from '../../utils/asyncHandler';
+import { ApiError } from '../../utils/ApiError';
+
+const investigationService = new InvestigationService();
+
+/**
+ * POST /api/cases/:caseId/investigation-events
+ */
+export const createInvestigationEvent = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const userId = req.user!.id;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const event = await investigationService.createInvestigationEvent(
+    caseId,
+    req.body,
+    userId,
+    organizationId
+  );
+
+  res.status(201).json({
+    success: true,
+    data: event,
+  });
+});
+
+/**
+ * GET /api/cases/:caseId/investigation-events
+ */
+export const getInvestigationEvents = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const events = await investigationService.getInvestigationEvents(caseId, organizationId);
+
+  res.status(200).json({
+    success: true,
+    data: events,
+  });
+});
+
+/**
+ * POST /api/cases/:caseId/evidence
+ */
+export const createEvidence = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const userId = req.user!.id;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const evidence = await investigationService.createEvidence(caseId, req.body, userId, organizationId);
+
+  res.status(201).json({
+    success: true,
+    data: evidence,
+  });
+});
+
+/**
+ * GET /api/cases/:caseId/evidence
+ */
+export const getEvidence = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const evidence = await investigationService.getEvidence(caseId, organizationId);
+
+  res.status(200).json({
+    success: true,
+    data: evidence,
+  });
+});
+
+/**
+ * POST /api/cases/:caseId/witnesses
+ */
+export const createWitness = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const userId = req.user!.id;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const witness = await investigationService.createWitness(caseId, req.body, userId, organizationId);
+
+  res.status(201).json({
+    success: true,
+    data: witness,
+  });
+});
+
+/**
+ * GET /api/cases/:caseId/witnesses
+ */
+export const getWitnesses = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const witnesses = await investigationService.getWitnesses(caseId, organizationId);
+
+  res.status(200).json({
+    success: true,
+    data: witnesses,
+  });
+});
+
+/**
+ * POST /api/cases/:caseId/accused
+ */
+export const createAccused = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const userId = req.user!.id;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const accused = await investigationService.createAccused(caseId, req.body, userId, organizationId);
+
+  res.status(201).json({
+    success: true,
+    data: accused,
+  });
+});
+
+/**
+ * GET /api/cases/:caseId/accused
+ */
+export const getAccused = asyncHandler(async (req: Request, res: Response) => {
+  const { caseId } = req.params;
+  const organizationId = req.user!.organizationId;
+
+  if (!organizationId) {
+    throw ApiError.badRequest('User must be associated with a police station');
+  }
+
+  const accused = await investigationService.getAccused(caseId, organizationId);
+
+  res.status(200).json({
+    success: true,
+    data: accused,
+  });
+});
