@@ -155,9 +155,9 @@ nyayasankalan/
 
 ### Environment Variables
 ```env
-CLOUDINARY_CLOUD_NAME=dxdrzit6x                    # ✅ Configured
-CLOUDINARY_API_KEY=233849662849362                 # ✅ Configured
-CLOUDINARY_API_SECRET=HrSlMdQKg4RxOxSMWRqhigc-o6A  # ✅ Configured
+CLOUDINARY_CLOUD_NAME=********                    # ✅ Configured
+CLOUDINARY_API_KEY=api_key_of_cloudinary                 # ✅ Configured
+CLOUDINARY_API_SECRET=your_secret  # ✅ Configured
 ```
 
 ### Dependencies Added
