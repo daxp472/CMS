@@ -10,7 +10,7 @@ export const timelineApi = {
     const response = await apiClient.get<ApiResponse<TimelineEvent[]>>(
       `/cases/${caseId}/timeline`
     );
-    return response.data.data!;
+    return response.data.data || [];
   },
 
   /**
@@ -21,6 +21,6 @@ export const timelineApi = {
     const response = await apiClient.get<ApiResponse<AuditLog[]>>(
       `/cases/${caseId}/audit-logs`
     );
-    return response.data.data!;
+    return response.data.data || [];
   },
 };

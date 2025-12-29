@@ -315,6 +315,36 @@ export interface DocumentRequest {
   issuer?: User | null;
 }
 
+export enum CaseReopenStatus {
+  REQUESTED = 'REQUESTED',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+
+export interface CaseReopenRequest {
+  id: string;
+  caseId: string;
+  requestedBy: string;
+  reviewedBy?: string | null;
+  status: CaseReopenStatus;
+  policeReason: string;
+  judgeNote?: string | null;
+  createdAt: string;
+  decidedAt?: string | null;
+  requester?: User | null;
+  reviewer?: User | null;
+}
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  relatedCaseId: string;
+  type: 'INFO' | 'ACTION' | 'WARNING';
+  isRead: boolean;
+  createdAt: string;
+}
+
 // ====================================================================
 // COURT TYPES
 // ====================================================================
@@ -378,16 +408,16 @@ export interface AuditLog {
   performedBy: string;
   performedByUser?: User;
   performedAt: string;
+  timestamp: string;
   changes: any;
 }
 
 export interface TimelineEvent {
-  id: string;
+  type: string;
   timestamp: string;
-  eventType: string;
-  description: string;
-  actor: string;
-  actorUser?: User;
+  title: string;
+  description?: string;
+  actor?: string;
 }
 
 // ====================================================================
