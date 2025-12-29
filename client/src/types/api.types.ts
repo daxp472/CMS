@@ -335,6 +335,16 @@ export interface CaseReopenRequest {
   reviewer?: User | null;
 }
 
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  relatedCaseId: string;
+  type: 'INFO' | 'ACTION' | 'WARNING';
+  isRead: boolean;
+  createdAt: string;
+}
+
 // ====================================================================
 // COURT TYPES
 // ====================================================================
@@ -398,16 +408,16 @@ export interface AuditLog {
   performedBy: string;
   performedByUser?: User;
   performedAt: string;
+  timestamp: string;
   changes: any;
 }
 
 export interface TimelineEvent {
-  id: string;
+  type: string;
   timestamp: string;
-  eventType: string;
-  description: string;
-  actor: string;
-  actorUser?: User;
+  title: string;
+  description?: string;
+  actor?: string;
 }
 
 // ====================================================================

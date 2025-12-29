@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../types/api.types';
+import { NotificationBell } from '../common/NotificationBell';
 
 export const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -49,6 +50,11 @@ export const Navbar: React.FC = () => {
                 <p className="text-gray-500">{user.role.replace('_', ' ')}</p>
               </div>
               
+              {/* Notification bell */}
+              <div className="ml-3">
+                <NotificationBell />
+              </div>
+
               <button
                 onClick={handleLogout}
                 className="btn btn-secondary text-sm"

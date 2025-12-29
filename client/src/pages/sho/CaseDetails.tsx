@@ -10,6 +10,7 @@ import { Input } from '../../components/ui/Input';
 import { Loader } from '../../components/common/Loader';
 import { ErrorMessage } from '../../components/common/ErrorMessage';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CaseTimeline } from '../../components/case/CaseTimeline';
 import { caseApi, courtApi, organizationApi } from '../../api';
 import type { Officer } from '../../api/organization.api';
 import type { Case, Court } from '../../types/api.types';
@@ -361,6 +362,11 @@ export const SHOCaseDetails: React.FC = () => {
             </div>
           </Card>
         )}
+
+        {/* Case Timeline */}
+        <Card title="Case Timeline">
+          <CaseTimeline caseId={id!} />
+        </Card>
 
         {/* Back Button */}
         <div className="flex gap-4">

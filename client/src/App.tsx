@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { Layout } from './components/layout/Layout';
 import { UserRole } from './types/api.types';
+import { Notifications } from './pages/Notifications';
 
 // Auth Pages
 import { Login } from './pages/auth/Login';
@@ -36,6 +38,7 @@ import { MyReopenRequests } from './pages/police/MyReopenRequests';
 function App() {
   return (
     <AuthProvider>
+      <NotificationProvider>
       <BrowserRouter>
         <Toaster position="top-right" />
         <Routes>
@@ -125,11 +128,15 @@ function App() {
             }
           />
 
+          {/* Notifications page */}
+          <Route path="/notifications" element={<ProtectedRoute allowedRoles={[UserRole.POLICE, UserRole.SHO, UserRole.COURT_CLERK, UserRole.JUDGE]}><Layout><Notifications /></Layout></ProtectedRoute>} />
+
           {/* Default redirect */}
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<div className="p-8 text-center"><h1 className="text-2xl font-bold">404 - Page Not Found</h1></div>} />
         </Routes>
       </BrowserRouter>
+      </NotificationProvider>
     </AuthProvider>
   );
 }

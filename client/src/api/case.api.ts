@@ -71,4 +71,13 @@ export const caseApi = {
     );
     return response.data.data!;
   },
+
+  /**
+   * GET /api/cases
+   * Generic paginated list based on role (used by SHO/Court/Judge)
+   */
+  getCases: async (_organizationId: string, _userRole: 'SHO' | 'COURT_CLERK' | 'JUDGE', page = 1, limit = 20): Promise<CasesResponse> => {
+    const response = await apiClient.get<ApiResponse<CasesResponse>>('/cases/all', { params: { page, limit } });
+    return response.data.data || { cases: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+  },
 };

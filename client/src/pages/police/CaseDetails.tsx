@@ -16,6 +16,7 @@ import { useAuth } from '../../context/AuthContext';
 import type { Case, DocumentRequest } from '../../types/api.types';
 import { CaseState, EvidenceCategory, AccusedStatus } from '../../types/api.types';
 import { getCaseStateBadgeVariant, getCaseStateLabel } from '../../utils/caseState';
+import { CaseTimeline } from '../../components/case/CaseTimeline';
 
 export const PoliceCaseDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -339,6 +340,13 @@ export const PoliceCaseDetails: React.FC = () => {
                 })}
               </p>
             </div>
+          </div>
+        </Card>
+
+        {/* Timeline */}
+        <Card title="Timeline">
+          <div>
+            <CaseTimeline caseId={id!} />
           </div>
         </Card>
 

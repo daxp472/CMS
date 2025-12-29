@@ -10,6 +10,7 @@ import { Input } from '../../components/ui/Input';
 import { Loader } from '../../components/common/Loader';
 import { ErrorMessage } from '../../components/common/ErrorMessage';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CaseTimeline } from '../../components/case/CaseTimeline';
 import { caseApi, courtApi } from '../../api';
 import type { Case, CourtAction } from '../../types/api.types';
 import { CaseState, CourtActionType } from '../../types/api.types';
@@ -272,6 +273,11 @@ export const JudgeCaseDetails: React.FC = () => {
               ))}
             </div>
           )}
+        </Card>
+
+        {/* Case Timeline */}
+        <Card title="Case Timeline">
+          <CaseTimeline caseId={id!} />
         </Card>
 
         {/* Back Button */}
